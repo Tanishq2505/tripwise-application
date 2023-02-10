@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "761753665407",
+    "firebase_url": "https://tripwise-6a041-default-rtdb.firebaseio.com",
+    "project_id": "tripwise-6a041",
+    "storage_bucket": "tripwise-6a041.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761753665407:android:9e13cfb42edf3176faa44a",
+        "android_client_info": {
+          "package_name": "in.ac.iitg.trip_wise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761753665407-i5s03svor9rjqufqg7qstcof9uqqr4hc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCs13s0pzlVpw2t8rXNU_SZtaE6xuq9DU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761753665407-i5s03svor9rjqufqg7qstcof9uqqr4hc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

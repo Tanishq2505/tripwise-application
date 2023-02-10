@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>761753665407-r3v1fog72ite58ju7d37o9alou4f7abg.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.761753665407-r3v1fog72ite58ju7d37o9alou4f7abg</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAMmpjT7ZTU494g3T1QBQYLZCwhPOq4LaY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>761753665407</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>in.ac.iitg.tripWise</string>
+	<key>PROJECT_ID</key>
+	<string>tripwise-6a041</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tripwise-6a041.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:761753665407:ios:a851a235e52ce0e1faa44a</string>
+	<key>DATABASE_URL</key>
+	<string>https://tripwise-6a041-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
