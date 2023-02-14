@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:trip_wise/models/new_user_question.dart';
 import 'package:trip_wise/presentation/screens/home_screen.dart';
 import 'package:trip_wise/presentation/screens/login_screen.dart';
+import 'package:trip_wise/presentation/screens/start_question.dart';
 import 'package:trip_wise/services/firebase_auth.dart';
 
 void main() async {
@@ -18,6 +20,9 @@ void main() async {
         StreamProvider(
           create: (context) => context.read<FirebaseAuthMethods>().authState,
           initialData: null,
+        ),
+        ChangeNotifierProvider<QuestionList>(
+          create: (context) => QuestionList(),
         ),
       ],
       child: MyApp(),
@@ -36,7 +41,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.grey,
       ),
-      home: const AuthWrapper(),
+      home: const StartQuestions(),
     );
   }
 }
