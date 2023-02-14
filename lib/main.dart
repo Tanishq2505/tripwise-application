@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.grey,
       ),
-      home: const StartQuestions(),
+      home: const AuthWrapper(),
     );
   }
 }
