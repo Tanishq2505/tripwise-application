@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
+import 'package:trip_wise/presentation/screens/dest_details.dart';
 import 'package:trip_wise/presentation/screens/login_screen.dart';
 import 'package:trip_wise/presentation/screens/profile_screen.dart';
 import 'package:trip_wise/presentation/screens/signup_screen.dart';
@@ -72,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
             await context.read<FirebaseAuthMethods>().signOut(context);
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
+                  builder: (context) => const LoginScreen(),
                 ),
                 (route) => false);
           },
@@ -109,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (builder) => ProfileScreen(),
+                            builder: (builder) => const ProfileScreen(),
                           ),
                         );
                       },
@@ -120,13 +121,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Hero(
                         tag: "profile",
                         child: CircleAvatar(
+                          radius: 40,
                           child: ClipOval(
                             child: Image.network(
                               firebaseUser!.photoURL!,
                               fit: BoxFit.cover,
                             ),
                           ),
-                          radius: 40,
                         ),
                       ),
                     ),
@@ -219,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                               ),
-                              border: OutlineInputBorder(
+                              border: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                   width: 4,
                                 ),
@@ -263,7 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                               ),
-                              border: OutlineInputBorder(
+                              border: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                   width: 4,
                                 ),
@@ -273,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           TextField(
                             onTap: () async {
                               // generate a new token here
-                              final sessionToken = Uuid().v4();
+                              final sessionToken = const Uuid().v4();
                               final Suggestion? result = await showSearch(
                                 context: context,
                                 delegate: AddressSearch(sessionToken),
@@ -300,7 +301,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                               ),
-                              border: OutlineInputBorder(
+                              border: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                   width: 4,
                                 ),
@@ -329,6 +330,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Logger().e("testt");
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => cityDetails()));
+        },
+        child: const Icon(Icons.arrow_right),
       ),
     );
   }
