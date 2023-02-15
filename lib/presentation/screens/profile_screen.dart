@@ -28,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     TextEditingController cityController = TextEditingController();
 
     emailController.text = firebaseUser!.email.toString();
-    phoneController.text = firebaseUser.phoneNumber.toString();
+    phoneController.text = firebaseUser.phoneNumber ?? "Phone";
 
     return Scaffold(
       backgroundColor: const Color(0xffbababa),
@@ -47,7 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       color: Colors.black,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   IconButton(
                     onPressed: () {},
                     icon: const Icon(
@@ -134,7 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           buildTextInput(
                             cityController,
                             "City",
-                            TextInputType.phone,
+                            TextInputType.name,
                             false,
                             (p0) => null,
                             null,
