@@ -30,16 +30,22 @@ class _hotelBookingState extends State<hotelBooking> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: height * 0.03,
+                ),
                 Container(
                   margin: const EdgeInsets.only(bottom: 25),
                   height: height / 15,
                   width: width,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Hotels ',
                         style: GoogleFonts.nunito(
-                            fontSize: 28, fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.w700,
+                          fontSize: width * 0.12,
+                        ),
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
@@ -98,7 +104,7 @@ class _hotelBookingState extends State<hotelBooking> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: 175,
+                        width: 155,
                         height: 50,
                         child: TextField(
                           onTap: () async {
@@ -151,7 +157,7 @@ class _hotelBookingState extends State<hotelBooking> {
                         ),
                       ),
                       SizedBox(
-                        width: 175,
+                        width: 155,
                         height: 50,
                         child: TextField(
                           onTap: () async {
@@ -407,16 +413,6 @@ class _hotelBookingState extends State<hotelBooking> {
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => const cityDetails(),
-            ),
-          );
-        },
-        child: const Icon(FontAwesomeIcons.arrowLeft, size: 20),
       ),
     );
   }

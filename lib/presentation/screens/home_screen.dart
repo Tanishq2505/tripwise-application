@@ -310,6 +310,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           FilledButton.tonal(
                             onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => cityDetails(
+                                    city: _destinationController.text,
+                                  ),
+                                ),
+                              );
                               _startDateController.clear();
                               _endDateController.clear();
                             },
@@ -330,14 +338,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Logger().e("testt");
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => cityDetails()));
-        },
-        child: const Icon(Icons.arrow_right),
       ),
     );
   }

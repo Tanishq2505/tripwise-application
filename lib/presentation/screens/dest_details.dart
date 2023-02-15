@@ -5,12 +5,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:trip_wise/presentation/screens/flights.dart';
 import 'package:trip_wise/presentation/screens/hotels.dart';
-import 'package:trip_wise/presentation/screens/trains.dart';
+import 'package:trip_wise/presentation/screens/train_booking_screen.dart';
 import 'package:trip_wise/presentation/widgets/cardDesign.dart';
 import 'package:trip_wise/presentation/widgets/weatherCard.dart';
 
 class cityDetails extends StatefulWidget {
-  const cityDetails({super.key});
+  final String city;
+  const cityDetails({super.key, required this.city});
 
   @override
   State<cityDetails> createState() => _cityDetailsState();
@@ -43,7 +44,7 @@ class _cityDetailsState extends State<cityDetails> {
                       maxLines: 1,
                     ),
                     Text(
-                      "Chennai",
+                      widget.city,
                       style: GoogleFonts.nunito(
                         fontWeight: FontWeight.w700,
                         fontSize: 30,
@@ -63,7 +64,7 @@ class _cityDetailsState extends State<cityDetails> {
                   children: [
                     FilledButton.tonal(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(
+                        Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => fligthBooking(),
                           ),
@@ -87,7 +88,7 @@ class _cityDetailsState extends State<cityDetails> {
                     const SizedBox(width: 15.0),
                     FilledButton.tonal(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(
+                        Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => hotelBooking(),
                           ),
@@ -111,9 +112,9 @@ class _cityDetailsState extends State<cityDetails> {
                     const SizedBox(width: 15.0),
                     FilledButton.tonal(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(
+                        Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => fligthBooking(),
+                            builder: (context) => TrainBooking(),
                           ),
                         );
                       },
@@ -217,7 +218,7 @@ class _cityDetailsState extends State<cityDetails> {
               const SizedBox(height: 20),
               Align(
                 alignment: Alignment.center,
-                child: weatherCardDesign(width, height),
+                child: weatherCardDesign(width, height, widget.city),
               ),
             ],
           ),
