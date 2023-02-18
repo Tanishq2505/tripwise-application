@@ -29,3 +29,8 @@ final kInputTextDecoration = InputDecoration(
   ),
   suffixIconColor: Color(0xff6f6f6f),
 );
+
+enum kSearchType {
+  airportonly,
+  cityonly,
+}

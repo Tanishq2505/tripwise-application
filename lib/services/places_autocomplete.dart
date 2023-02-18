@@ -28,25 +28,24 @@ class PlaceApiProvider {
   // static final String iosKey = 'YOUR_API_KEY_HERE';
   final apiKey = androidKey;
 
-  Future<List<Suggestion>> fetchSuggestions(String input, String lang) async {
+  Future<List<Suggestion>> fetchSuggestions(String input, String type) async {
+    Logger().v(type);
     final request =
-        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&types=address&language=$lang&components=country:ch&key=$apiKey&sessiontoken=$sessionToken';
+        'https://www.momondo.in/mvm/smartyv2/search?f=j&s=${type.split('.')[1]}&where=$input&lc_cc=IN&lc=en&sv=5&cv=undefined&c=undefined&searchId=undefined&v=undefined';
     final response = await client.get(
       Uri.parse(request),
     );
-    Logger().e(response.body);
+    // Logger().e(response.body);
     if (response.statusCode == 200) {
       final result = json.decode(response.body);
-      if (result['status'] == 'OK') {
-        // compose suggestions in a list
-        return result['predictions']
-            .map<Suggestion>((p) => Suggestion(p['place_id'], p['description']))
-            .toList();
-      }
-      if (result['status'] == 'ZERO_RESULTS') {
-        return [];
-      }
-      throw Exception(result['error_message']);
+      // Logger().d(result[0]);
+
+      // compose suggestions in a list
+      List<Suggestion> finalResult = result
+          .map<Suggestion>((p) => Suggestion(p["displayname"], p["id"]))
+          .toList();
+
+      return finalResult;
     } else {
       throw Exception('Failed to fetch suggestion');
     }
