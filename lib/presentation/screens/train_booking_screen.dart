@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:trip_wise/constants.dart';
+import 'package:trip_wise/models/suggestion_autocomplete.dart';
 import 'package:trip_wise/presentation/widgets/search_delegate.dart';
 import 'package:trip_wise/services/places_autocomplete.dart';
 import 'package:uuid/uuid.dart';
@@ -72,7 +73,8 @@ class _TrainBookingState extends State<TrainBooking> {
                       // This will change the text displayed in the TextField
                       if (result != null) {
                         setState(() {
-                          _startPlaceController.text = result.description;
+                          _startPlaceController.text =
+                              result.cityonly ?? "City";
                         });
                       }
                     },
@@ -114,7 +116,8 @@ class _TrainBookingState extends State<TrainBooking> {
                       // This will change the text displayed in the TextField
                       if (result != null) {
                         setState(() {
-                          _destinationController.text = result.description;
+                          _destinationController.text =
+                              result.cityonly ?? "City";
                         });
                       }
                     },

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:trip_wise/models/suggestion_autocomplete.dart';
 import 'package:trip_wise/presentation/screens/web_view_screen.dart';
 import 'package:trip_wise/presentation/widgets/search_delegate.dart';
 import 'package:trip_wise/services/places_autocomplete.dart';
@@ -98,7 +99,7 @@ class _fligthBookingState extends State<fligthBooking> {
                   // This will change the text displayed in the TextField
                   if (result != null) {
                     setState(() {
-                      _departureController.text = result.description;
+                      _departureController.text = result.apicode ?? "City";
                     });
                   }
                 },
@@ -144,7 +145,7 @@ class _fligthBookingState extends State<fligthBooking> {
                   // This will change the text displayed in the TextField
                   if (result != null) {
                     setState(() {
-                      _destinationController.text = result.description;
+                      _destinationController.text = result.apicode ?? "City";
                     });
                   }
                 },

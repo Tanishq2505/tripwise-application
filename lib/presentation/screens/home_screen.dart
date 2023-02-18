@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:trip_wise/constants.dart';
+import 'package:trip_wise/models/suggestion_autocomplete.dart';
 import 'package:trip_wise/presentation/screens/dest_details.dart';
 import 'package:trip_wise/presentation/screens/login_screen.dart';
 import 'package:trip_wise/presentation/screens/profile_screen.dart';
@@ -300,10 +301,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                               // This will change the text displayed in the TextField
                               if (result != null) {
-                                Logger().v(result.description);
                                 setState(() {
                                   _destinationController.text =
-                                      result.placeId.split(',')[0];
+                                      result.cityonly ?? "City";
                                 });
                               }
                             },

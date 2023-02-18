@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:trip_wise/models/suggestion_autocomplete.dart';
 import 'package:trip_wise/services/places_autocomplete.dart';
 
 class AddressSearch extends SearchDelegate<Suggestion> {
@@ -30,12 +31,7 @@ class AddressSearch extends SearchDelegate<Suggestion> {
       tooltip: 'Back',
       icon: Icon(Icons.arrow_back),
       onPressed: () {
-        close(
-            context,
-            Suggestion(
-              query,
-              query,
-            ));
+        close(context, Suggestion());
       },
     );
   }
@@ -60,8 +56,9 @@ class AddressSearch extends SearchDelegate<Suggestion> {
                     snapshot.connectionState == ConnectionState.done)
                 ? ListView.builder(
                     itemBuilder: (context, index) => ListTile(
-                      title:
-                          Text((snapshot.data![index] as Suggestion).placeId),
+                      title: Text(
+                          (snapshot.data![index] as Suggestion).displayname ??
+                              "Display name"),
                       onTap: () {
                         close(context, snapshot.data![index] as Suggestion);
                       },

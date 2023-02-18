@@ -3,19 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
-
-// For storing our result
-class Suggestion {
-  final String placeId;
-  final String description;
-
-  Suggestion(this.placeId, this.description);
-
-  @override
-  String toString() {
-    return 'Suggestion(description: $description, placeId: $placeId)';
-  }
-}
+import 'package:trip_wise/models/suggestion_autocomplete.dart';
 
 class PlaceApiProvider {
   final client = Client();
@@ -42,7 +30,11 @@ class PlaceApiProvider {
 
       // compose suggestions in a list
       List<Suggestion> finalResult = result
-          .map<Suggestion>((p) => Suggestion(p["displayname"], p["id"]))
+          .map<Suggestion>(
+            (p) => Suggestion.fromJson(
+              p,
+            ),
+          )
           .toList();
 
       return finalResult;
