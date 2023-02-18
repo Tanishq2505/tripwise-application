@@ -6,6 +6,7 @@ import 'package:trip_wise/models/weather_data.dart';
 
 Future<WeatherData> getWeather(String city) async {
   try {
+    Logger().i(city);
     Response response = await Dio().get(
         "https://api.weatherapi.com/v1/forecast.json?key=d8850e2b2a724d7a9d595832231502&q=${city}&days=3");
 
@@ -22,7 +23,7 @@ Future<WeatherData> getWeather(String city) async {
 
 Widget weatherCardDesign(width, height, String city) {
   return Container(
-    height: height / 3,
+    height: height / 2.7,
     width: width / 1.2,
     margin: const EdgeInsets.only(top: 10, bottom: 30),
     decoration: BoxDecoration(

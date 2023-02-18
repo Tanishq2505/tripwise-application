@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="in.ac.iitg.trip_wise">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="Trip Wise"
         android:name="${applicationName}"

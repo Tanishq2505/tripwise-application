@@ -11,13 +11,24 @@ import 'package:trip_wise/presentation/widgets/weatherCard.dart';
 
 class cityDetails extends StatefulWidget {
   final String city;
-  const cityDetails({super.key, required this.city});
+  final String startDate;
+  final String endDate;
+  const cityDetails({
+    super.key,
+    required this.city,
+    required this.startDate,
+    required this.endDate,
+  });
 
   @override
   State<cityDetails> createState() => _cityDetailsState();
 }
 
 class _cityDetailsState extends State<cityDetails> {
+  TextEditingController _startDateController = TextEditingController();
+  TextEditingController _endDateController = TextEditingController();
+  TextEditingController _destinationController = TextEditingController();
+  TextEditingController _departureController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -28,6 +39,9 @@ class _cityDetailsState extends State<cityDetails> {
           child: Column(
             children: [
               SizedBox(
+                height: height * 0.05,
+              ),
+              SizedBox(
                 height: height / 8,
                 width: width,
                 child: Column(
@@ -35,7 +49,7 @@ class _cityDetailsState extends State<cityDetails> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "Your are travelling to",
+                      "You are travelling to",
                       style: GoogleFonts.nunito(
                         fontWeight: FontWeight.w700,
                         fontSize: 27,
@@ -66,7 +80,10 @@ class _cityDetailsState extends State<cityDetails> {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => fligthBooking(),
+                            builder: (context) => fligthBooking(
+                                destination: widget.city,
+                                startDate: widget.startDate,
+                                endDate: widget.endDate),
                           ),
                         );
                       },

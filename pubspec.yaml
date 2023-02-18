@@ -47,6 +47,11 @@ dependencies:
   uuid: ^3.0.7
   font_awesome_flutter: ^10.4.0
   readmore: ^2.2.0
+  webview_flutter: ^4.0.2
+  page_transition: ^2.0.9
+  cart_stepper: ^4.1.0
+  custom_radio_grouped_button: ^2.1.2+2
+
 
 dev_dependencies:
   flutter_test:

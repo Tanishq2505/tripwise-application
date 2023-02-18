@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:trip_wise/models/new_user_question.dart';
 import 'package:trip_wise/presentation/screens/home_screen.dart';
 import 'package:trip_wise/presentation/screens/login_screen.dart';
-import 'package:trip_wise/presentation/screens/start_question.dart';
 import 'package:trip_wise/services/firebase_auth.dart';
 
 void main() async {

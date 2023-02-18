@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:trip_wise/constants.dart';
 import 'package:trip_wise/presentation/widgets/search_delegate.dart';
 import 'package:trip_wise/services/places_autocomplete.dart';
 import 'package:uuid/uuid.dart';
@@ -63,7 +64,10 @@ class _TrainBookingState extends State<TrainBooking> {
                       final sessionToken = Uuid().v4();
                       final Suggestion? result = await showSearch(
                         context: context,
-                        delegate: AddressSearch(sessionToken),
+                        delegate: AddressSearch(
+                          sessionToken,
+                          kSearchType.cityonly.toString(),
+                        ),
                       );
                       // This will change the text displayed in the TextField
                       if (result != null) {
@@ -102,7 +106,10 @@ class _TrainBookingState extends State<TrainBooking> {
                       final sessionToken = Uuid().v4();
                       final Suggestion? result = await showSearch(
                         context: context,
-                        delegate: AddressSearch(sessionToken),
+                        delegate: AddressSearch(
+                          sessionToken,
+                          kSearchType.cityonly.toString(),
+                        ),
                       );
                       // This will change the text displayed in the TextField
                       if (result != null) {

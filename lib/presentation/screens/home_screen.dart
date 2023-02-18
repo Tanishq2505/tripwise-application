@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
+import 'package:trip_wise/constants.dart';
 import 'package:trip_wise/presentation/screens/dest_details.dart';
 import 'package:trip_wise/presentation/screens/login_screen.dart';
 import 'package:trip_wise/presentation/screens/profile_screen.dart';
@@ -12,6 +13,7 @@ import 'package:trip_wise/presentation/screens/signup_screen.dart';
 import 'package:trip_wise/presentation/widgets/search_delegate.dart';
 import 'package:trip_wise/services/firebase_auth.dart';
 import 'package:trip_wise/services/places_autocomplete.dart';
+import 'package:trip_wise/utils/show_snack_bar.dart';
 import 'package:uuid/uuid.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -194,6 +196,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
 
                               if (pickedDate != null) {
+                                if (!pickedDate.isAfter(DateTime.now())) {
+                                  showSnackBar(
+                                      context, 'Date should be of the future');
+                                  return;
+                                }
                                 print(
                                     pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
                                 String formattedDate =
@@ -238,6 +245,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
 
                               if (pickedDate != null) {
+                                if (_startDateController.text != '' &&
+                                    !pickedDate.isAfter(
+                                      DateFormat('yyyy-MM-dd')
+                                          .parse(_startDateController.text),
+                                    )) {
+                                  showSnackBar(context,
+                                      'End Date should be after the start date');
+                                  return;
+                                }
                                 print(
                                     pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
                                 String formattedDate =
@@ -277,13 +293,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               final sessionToken = const Uuid().v4();
                               final Suggestion? result = await showSearch(
                                 context: context,
-                                delegate: AddressSearch(sessionToken),
+                                delegate: AddressSearch(
+                                  sessionToken,
+                                  kSearchType.cityonly.toString(),
+                                ),
                               );
                               // This will change the text displayed in the TextField
                               if (result != null) {
+                                Logger().v(result.description);
                                 setState(() {
                                   _destinationController.text =
-                                      result.description;
+                                      result.placeId.split(',')[0];
                                 });
                               }
                             },
@@ -310,16 +330,26 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           FilledButton.tonal(
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => cityDetails(
-                                    city: _destinationController.text,
+                              if (_startDateController.text == '' ||
+                                  _endDateController.text == '' ||
+                                  _destinationController.text == '') {
+                                showSnackBar(
+                                    context, "Please enter all the details");
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => cityDetails(
+                                      city: _destinationController.text,
+                                      startDate: _startDateController.text,
+                                      endDate: _endDateController.text,
+                                    ),
                                   ),
-                                ),
-                              );
-                              _startDateController.clear();
-                              _endDateController.clear();
+                                );
+                                // _startDateController.clear();
+                                // _endDateController.clear();
+                                // _destinationController.clear();
+                              }
                             },
                             child: Text(
                               "Start Trip",
