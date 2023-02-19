@@ -1,14 +1,12 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:trip_wise/models/suggestion_autocomplete.dart';
 import 'package:trip_wise/presentation/screens/flights.dart';
 import 'package:trip_wise/presentation/screens/hotels.dart';
-import 'package:trip_wise/presentation/screens/train_booking_screen.dart';
 import 'package:trip_wise/presentation/screens/web_view_screen.dart';
 import 'package:trip_wise/presentation/widgets/cardDesign.dart';
+import 'package:trip_wise/presentation/widgets/data.dart';
 import 'package:trip_wise/presentation/widgets/weatherCard.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -255,6 +253,9 @@ class _cityDetailsState extends State<cityDetails> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => dataPrint('Mumbai'),
       ),
     );
   }
