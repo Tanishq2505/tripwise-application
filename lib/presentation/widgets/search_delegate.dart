@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:trip_wise/models/suggestion_autocomplete.dart';
 import 'package:trip_wise/services/places_autocomplete.dart';
@@ -43,6 +45,7 @@ class AddressSearch extends SearchDelegate<Suggestion> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return FutureBuilder<List>(
       future: query == "" ? null : apiClient.fetchSuggestions(query, type),
       builder: (context, snapshot) {
@@ -56,16 +59,90 @@ class AddressSearch extends SearchDelegate<Suggestion> {
                     snapshot.connectionState == ConnectionState.done)
                 ? ListView.builder(
                     itemBuilder: (context, index) => ListTile(
-                      title: Text(
-                          (snapshot.data![index] as Suggestion).displayname ??
-                              "Display name"),
+                      title: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              height: size.height * 0.06,
+                              decoration: BoxDecoration(
+                                color: Color(0xffebe6ef),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: ((snapshot.data![index] as Suggestion)
+                                              .destinationImages !=
+                                          null &&
+                                      (snapshot.data![index] as Suggestion)
+                                              .loctype ==
+                                          'city')
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(
+                                        10,
+                                      ),
+                                      child: Image.network(
+                                        (snapshot.data![index] as Suggestion)
+                                            .destinationImages!
+                                            .imageJpeg!,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : (snapshot.data![index] as Suggestion)
+                                              .loctype ==
+                                          'ap'
+                                      ? Icon(
+                                          CupertinoIcons.airplane,
+                                        )
+                                      : (snapshot.data![index] as Suggestion)
+                                                  .loctype ==
+                                              'lm'
+                                          ? Icon(
+                                              CupertinoIcons.location_solid,
+                                            )
+                                          : Icon(
+                                              CupertinoIcons.bed_double_fill,
+                                            ),
+                            ),
+                          ),
+                          Expanded(
+                            child: SizedBox(),
+                          ),
+                          Expanded(
+                            flex: 11,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  (snapshot.data![index] as Suggestion)
+                                          .smartyDisplay ??
+                                      "Display name",
+                                  style: GoogleFonts.nunito(),
+                                ),
+                                Text(
+                                  (snapshot.data![index] as Suggestion)
+                                          .displayType!
+                                          .displayName ??
+                                      "Type",
+                                  style: GoogleFonts.nunito(
+                                    color: Colors.grey,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                       onTap: () {
                         close(context, snapshot.data![index] as Suggestion);
                       },
                     ),
                     itemCount: snapshot.data!.length,
                   )
-                : Container(child: Text('Loading...'));
+                : Container(
+                    padding: EdgeInsets.only(
+                      left: 10,
+                    ),
+                    child: Text('Loading...'),
+                  );
       },
     );
   }

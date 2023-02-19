@@ -14,7 +14,7 @@ import 'package:trip_wise/constants.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 
 class fligthBooking extends StatefulWidget {
-  final String destination;
+  final Suggestion destination;
   final String startDate;
   final String endDate;
   const fligthBooking({
@@ -42,7 +42,7 @@ class _fligthBookingState extends State<fligthBooking> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _destinationController.text = widget.destination;
+    _destinationController.text = widget.destination.apicode ?? "";
     _startDateController.text = widget.startDate;
     _endDateController.text = widget.endDate;
     _adultCount = 1;
@@ -545,7 +545,7 @@ class _fligthBookingState extends State<fligthBooking> {
                 controller = WebViewController()
                   ..loadRequest(
                     Uri.parse(
-                        'https://www.makemytrip.com/flight/search?itinerary=MAA-DEL-19/02/2023_DEL-MAA-28/02/2023&tripType=R&paxType=A-${_adultCount}_C-${_childrenCount}_I-${_infantCount}&intl=${_intl}&cabinClass=${_class}&ccde=US&lang=eng'),
+                        'https://www.makemytrip.com/flight/search?itinerary=${_departureController.text}-${_destinationController.text}-${DateFormat('dd/MM/yyyy').format(DateFormat('yyyy-MM-dd').parse(_startDateController.text))}_${_destinationController.text}-${_departureController.text}-${DateFormat('dd/MM/yyyy').format(DateFormat('yyyy-MM-dd').parse(_endDateController.text))}&tripType=R&paxType=A-${_adultCount}_C-${_childrenCount}_I-${_infantCount}&intl=false&cabinClass=E&ccde=US&lang=eng'),
                   )
                   ..setJavaScriptMode(JavaScriptMode.unrestricted);
                 Navigator.push(

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:trip_wise/models/suggestion_autocomplete.dart';
 import 'package:trip_wise/presentation/screens/flights.dart';
 import 'package:trip_wise/presentation/screens/hotels.dart';
 import 'package:trip_wise/presentation/screens/train_booking_screen.dart';
@@ -10,7 +11,7 @@ import 'package:trip_wise/presentation/widgets/cardDesign.dart';
 import 'package:trip_wise/presentation/widgets/weatherCard.dart';
 
 class cityDetails extends StatefulWidget {
-  final String city;
+  final Suggestion city;
   final String startDate;
   final String endDate;
   const cityDetails({
@@ -31,6 +32,7 @@ class _cityDetailsState extends State<cityDetails> {
   TextEditingController _departureController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    print(widget.city.displayType!.displayName!.split(',')[0]);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -58,7 +60,7 @@ class _cityDetailsState extends State<cityDetails> {
                       maxLines: 1,
                     ),
                     Text(
-                      widget.city,
+                      widget.city.smartyDisplay!.split(',')[0],
                       style: GoogleFonts.nunito(
                         fontWeight: FontWeight.w700,
                         fontSize: 30,
@@ -235,7 +237,8 @@ class _cityDetailsState extends State<cityDetails> {
               const SizedBox(height: 20),
               Align(
                 alignment: Alignment.center,
-                child: weatherCardDesign(width, height, widget.city),
+                child: weatherCardDesign(
+                    width, height, widget.city.smartyDisplay!.split(',')[0]),
               ),
             ],
           ),

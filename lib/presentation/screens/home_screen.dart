@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController _startDateController = TextEditingController();
   TextEditingController _endDateController = TextEditingController();
   TextEditingController _destinationController = TextEditingController();
+  late Suggestion? finalResult;
   String _quote =
       "Patience is the key to success, so wait while today's quote loads!";
   getQuote() async {
@@ -304,6 +305,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 setState(() {
                                   _destinationController.text =
                                       result.cityonly ?? "City";
+                                  Logger().v(result);
+                                  finalResult = result;
                                 });
                               }
                             },
@@ -340,7 +343,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => cityDetails(
-                                      city: _destinationController.text,
+                                      city: finalResult!,
                                       startDate: _startDateController.text,
                                       endDate: _endDateController.text,
                                     ),
