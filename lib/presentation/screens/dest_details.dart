@@ -7,8 +7,10 @@ import 'package:trip_wise/models/suggestion_autocomplete.dart';
 import 'package:trip_wise/presentation/screens/flights.dart';
 import 'package:trip_wise/presentation/screens/hotels.dart';
 import 'package:trip_wise/presentation/screens/train_booking_screen.dart';
+import 'package:trip_wise/presentation/screens/web_view_screen.dart';
 import 'package:trip_wise/presentation/widgets/cardDesign.dart';
 import 'package:trip_wise/presentation/widgets/weatherCard.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class cityDetails extends StatefulWidget {
   final Suggestion city;
@@ -133,7 +135,17 @@ class _cityDetailsState extends State<cityDetails> {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => TrainBooking(),
+                            builder: (context) => WebViewScreen(
+                              controller: WebViewController()
+                                ..loadRequest(
+                                  Uri.parse(
+                                    'https://www.irctc.co.in/nget/train-search',
+                                  ),
+                                )
+                                ..setJavaScriptMode(
+                                  JavaScriptMode.unrestricted,
+                                ),
+                            ),
                           ),
                         );
                       },
