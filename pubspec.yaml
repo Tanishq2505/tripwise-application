@@ -51,6 +51,7 @@ dependencies:
   page_transition: ^2.0.9
   cart_stepper: ^4.1.0
   custom_radio_grouped_button: ^2.1.2+2
+  numberpicker: ^2.1.1
 
 
 dev_dependencies:

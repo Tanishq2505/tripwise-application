@@ -10,10 +10,8 @@ import 'package:trip_wise/models/suggestion_autocomplete.dart';
 import 'package:trip_wise/presentation/screens/dest_details.dart';
 import 'package:trip_wise/presentation/screens/login_screen.dart';
 import 'package:trip_wise/presentation/screens/profile_screen.dart';
-import 'package:trip_wise/presentation/screens/signup_screen.dart';
 import 'package:trip_wise/presentation/widgets/search_delegate.dart';
 import 'package:trip_wise/services/firebase_auth.dart';
-import 'package:trip_wise/services/places_autocomplete.dart';
 import 'package:trip_wise/utils/show_snack_bar.dart';
 import 'package:uuid/uuid.dart';
 
