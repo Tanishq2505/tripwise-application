@@ -250,12 +250,10 @@ class _cityDetailsState extends State<cityDetails> {
                 child: weatherCardDesign(
                     width, height, widget.city.smartyDisplay!.split(',')[0]),
               ),
+              dataPrint('Mumbai'),
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => dataPrint('Mumbai'),
       ),
     );
   }

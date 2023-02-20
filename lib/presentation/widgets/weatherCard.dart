@@ -6,7 +6,6 @@ import 'package:trip_wise/models/weather_data.dart';
 
 Future<WeatherData> getWeather(String city) async {
   try {
-    Logger().i(city);
     Response response = await Dio().get(
         "https://api.weatherapi.com/v1/forecast.json?key=d8850e2b2a724d7a9d595832231502&q=${city}&days=3");
 

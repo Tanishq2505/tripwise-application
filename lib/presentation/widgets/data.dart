@@ -5,9 +5,8 @@ import 'package:trip_wise/models/attractions_data.dart';
 
 Future<AttractionDetails> getdestinattractions(String city) async {
   try {
-    Logger().i(city);
     Response response =
-        await Dio().get("10.150.23.219:8000/getdetails/mumbai");
+        await Dio().get("http://192.168.185.83:8000/getdetails/mumbai");
 
     if (response.statusCode!.toInt() > 199 &&
         response.statusCode!.toInt() < 300) {
@@ -26,7 +25,7 @@ Widget dataPrint(city) {
       future: getdestinattractions(city),
       builder: (context, snapshot) {
         print(snapshot.connectionState);
-        print(snapshot.data);
+        Logger().i((snapshot.data as AttractionDetails).points);
         switch (snapshot.connectionState) {
           case ConnectionState.none:
           case ConnectionState.waiting:

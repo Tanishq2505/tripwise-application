@@ -48,7 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final firebaseUser = context.watch<User?>();
 
     context.watch<User?>()!.reload();
-    Logger().e(firebaseUser!.displayName);
     var size = MediaQuery.of(context).size;
 
     AlertDialog alert = AlertDialog(
