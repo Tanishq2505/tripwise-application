@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:trip_wise/models/attractions_data.dart';
 import 'package:trip_wise/models/suggestion_autocomplete.dart';
 import 'package:trip_wise/presentation/screens/flights.dart';
 import 'package:trip_wise/presentation/screens/hotels.dart';
@@ -30,6 +31,16 @@ class _cityDetailsState extends State<cityDetails> {
   TextEditingController _endDateController = TextEditingController();
   TextEditingController _destinationController = TextEditingController();
   TextEditingController _departureController = TextEditingController();
+  late Future<AttractionDetails> getAttractionsFuture;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getAttractionsFuture =
+        getdestinattractions(widget.city.smartyDisplay!.split(',')[0]);
+  }
+
   @override
   Widget build(BuildContext context) {
     print(widget.city.displayType!.displayName!.split(',')[0]);
@@ -229,20 +240,36 @@ class _cityDetailsState extends State<cityDetails> {
                   ],
                 ),
               ),
-              Container(
-                height: height / 1.7,
-                width: width,
-                margin: const EdgeInsets.only(top: 30),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    cardDesign(height, width),
-                    cardDesign(height, width),
-                    cardDesign(height, width),
-                    cardDesign(height, width),
-                    cardDesign(height, width)
-                  ],
-                ),
+              FutureBuilder(
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                    case ConnectionState.waiting:
+                    case ConnectionState.active:
+                      break;
+                    case ConnectionState.done:
+                      if (snapshot.hasData) {
+                        AttractionDetails data =
+                            snapshot.data as AttractionDetails;
+                        return Container(
+                          height: height / 1.7,
+                          width: width,
+                          margin: const EdgeInsets.only(top: 30),
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => cardDesign(
+                              height,
+                              width,
+                              data.points![index],
+                            ),
+                            itemCount: data.points!.length,
+                          ),
+                        );
+                      }
+                  }
+                  return const SizedBox.shrink();
+                },
+                future: getAttractionsFuture,
               ),
               const SizedBox(height: 20),
               Align(
@@ -250,7 +277,6 @@ class _cityDetailsState extends State<cityDetails> {
                 child: weatherCardDesign(
                     width, height, widget.city.smartyDisplay!.split(',')[0]),
               ),
-              dataPrint('Mumbai'),
             ],
           ),
         ),

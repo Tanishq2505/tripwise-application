@@ -100,7 +100,7 @@ class _SignUpScreenState extends State<SignUpScreen> with ChangeNotifier {
                           if (val == null) {
                             return "Please enter your email";
                           }
-                          if (!RegExp('^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}')
+                          if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}')
                               .hasMatch(val)) {
                             return "Please enter valid email";
                           }
@@ -116,8 +116,7 @@ class _SignUpScreenState extends State<SignUpScreen> with ChangeNotifier {
                           if (val == null) {
                             return "Please enter your phone number";
                           }
-                          if (!RegExp(
-                                  r'^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$')
+                          if (!RegExp(r'^(\+\d{1,2}\s)?\(?\d{3}\)?\d{3}\d{4}$')
                               .hasMatch(val)) {
                             return "Please enter valid phone number";
                           }

@@ -27,7 +27,7 @@ class Points {
   String? title;
   String? type;
   Link? link;
-  Image? image;
+  ImageUrl? image;
   String? description;
 
   Points(
@@ -47,7 +47,7 @@ class Points {
     title = json['title'];
     type = json['type'];
     link = json['link'] != null ? new Link.fromJson(json['link']) : null;
-    image = json['image'] != null ? new Image.fromJson(json['image']) : null;
+    image = json['image'] != null ? new ImageUrl.fromJson(json['image']) : null;
     description = json['description'];
   }
 
@@ -105,13 +105,13 @@ class Link {
   }
 }
 
-class Image {
+class ImageUrl {
   String? url;
   String? alt;
 
-  Image({this.url, this.alt});
+  ImageUrl({this.url, this.alt});
 
-  Image.fromJson(Map<String, dynamic> json) {
+  ImageUrl.fromJson(Map<String, dynamic> json) {
     url = json['url'];
     alt = json['alt'];
   }
